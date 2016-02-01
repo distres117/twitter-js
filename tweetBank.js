@@ -1,8 +1,11 @@
 var _ = require('lodash');
+var lastId = 0;
 var data = [];
 
-function add (name, text, id) {
-  data.push({ name: name, text: text, id: String(id), img: Math.round(Math.random() * 994) });
+function add (name, text) {
+  var tweet = { name: name, text: text, id: String(lastId++), img: Math.round(Math.random() * 994) };
+  data.push(tweet);
+  return tweet;
 }
 
 function list () {
@@ -29,7 +32,7 @@ var getFakeTweet = function() {
 };
 
 for (var i = 0; i < 10; i++) {
-  add( getFakeName(), getFakeTweet(), i );
+  add( getFakeName(), getFakeTweet());
 }
 
 module.exports = { add: add, list: list, find: find };

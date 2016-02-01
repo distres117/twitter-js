@@ -4,6 +4,7 @@ var swig = require('swig');
 var routes = require('./routes');
 var bodyParser = require('body-parser');
 var port = process.env.port || 8080;
+var socketio = require('socket.io');
 
 swig.setDefaults({cache: false});
 app.engine('html', swig.renderFile);
@@ -23,11 +24,13 @@ app.use(function(req,res,next){
     next();
 });
 
-app.use('/', routes);
 
 
 
 
-app.listen(port, function(){
-   console.log("Server started on port " + port); 
+
+var server = app.listen(port, function(){
+   console.log("Server started on port " + port);
 });
+var io = socketio.listen(server);
+app.use('/', routes(io));
