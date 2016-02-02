@@ -26,7 +26,6 @@
 
     <!-- Wrap all page content here -->
     <div id="wrap">
-
       <!-- Fixed navbar -->
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -60,7 +59,11 @@
       </div>
 
       <!-- Begin page content -->
+      
       <div class="container">
+        <div class="alert alert-warning " role="alert" hidden="true">
+            <span>New tweet added!</span>
+        </div>
         {% block content %}Welcome to Twitter.js{% endblock %}
       </div> <!-- end container -->
 
@@ -91,7 +94,11 @@
       socket.on('new_tweet', function (tweet) {
         var elem = document.createElement('div');
         elem.innerHTML = tweet;
-        document.getElementById("tweets").appendChild(elem.firstChild)
+        document.getElementById("tweets").appendChild(elem.firstChild);
+        $('.alert').fadeIn('slow');
+        window.setTimeout(function(){
+          $('.alert').fadeOut('slow');
+        }, 2000);
 
         // some logic to add the new tweet to the DOM…
       });

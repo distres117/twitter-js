@@ -12,8 +12,6 @@
   "dependencies": {
     "body-parser": "^1.14.2",
     "express": "^4.13.4",
-    "express-partial": "^0.1.0",
-    "express-partials": "^0.3.0",
     "lodash": "^4.1.0",
     "socket.io": "^1.4.5",
     "swig": "^1.4.2"

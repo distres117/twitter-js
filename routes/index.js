@@ -19,7 +19,7 @@ module.exports = function(io){
      res.render('index', {title: 'Twitter-js - Tweet #' + id, tweets: tweet});
   });
 
-  router.post('/tweets', function(req,res){
+  router.post('/tweets', function(req,res, next){
      var tweet = tweetBank.add(req.body.name, req.body.text);
      res.render('users', tweet, function(err, rtn){
        io.sockets.emit('new_tweet', rtn);
