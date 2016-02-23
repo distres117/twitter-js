@@ -13,7 +13,7 @@
     </div>
     <div class="col-md-9">
 
-      <!-- display tweets here -->
+       <!--display tweets here -->
       <div>
         {% if showForm %}
         <form action="/tweets" method="POST">
@@ -21,15 +21,15 @@
           <input name="name" type="text" id="name_field" value="{{username}}" />
 
           <label for="text_field">Text:</label>
-          <input name="text" type="text" id="text_field" style="width: 350px;" />
+          <input name="tweet" type="text" id="text_field" style="width: 350px;" />
 
           <input type="submit" value="Submit" />
         </form>
         {% endif %}
       </div>
       <div id="tweets">
-      {% for tweet in tweets %}
-        {% include "users.html" with tweet %}
+      {% for _tweet in tweets %}
+        {% include "users.html" with _tweet %}
       {% endfor %}
       </div>
 

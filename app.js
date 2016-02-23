@@ -4,33 +4,40 @@ var swig = require('swig');
 var routes = require('./routes');
 var bodyParser = require('body-parser');
 var port = process.env.port || 8080;
-var socketio = require('socket.io');
+var morgan = require('morgan');
+var socketio = require('socket.io')
 
 swig.setDefaults({cache: false});
-app.engine('html', swig.renderFile);
 app.set('view engine', 'html');
+app.engine('html', swig.renderFile);
 app.set('views', __dirname + '/views');
-app.use(express.static('public'));
 
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
-//Logging middleware
+app.use(express.static('public'));
+app.use(express.static('node_modules'));
 app.use(function(req,res,next){
-    var temp = res.end;
-    res.end = function(){
-        temp.apply(this, arguments);
-        console.log(req.method, req.url, res.statusCode);
-    };
+    if (req.query.method){
+        req.method = req.query.method;
+    }
     next();
 });
 
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+app.use(morgan('dev'));
 
 
-
-
-
-var server = app.listen(port, function(){
-   console.log("Server started on port " + port);
+var server = app.listen(8080, function(){
+   console.log('Server is running...'); 
 });
+
 var io = socketio.listen(server);
 app.use('/', routes(io));
+
+module.exports = app;
+
+
+
+
+
+
+

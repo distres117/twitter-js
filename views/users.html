@@ -1,8 +1,11 @@
-<div>
-  <img src="https://unsplash.it/50?image={{img}}" id="user_img">
+<div class="well">
+  <img src="https://unsplash.it/50?image={{UserId}}" id="user_img">
   <div class="inline-text">
     <h3 id="user_name">{{name}}</h3>
-    <p>{{text}}</p>
-    <a href="/users/{{name}}">{{name}}</a>
+    <p><a href="/tweet/{{id}}">{{tweet}}</a></p>
+    <p>
+      <a href="/users/{{name}}">{{name}}</a>
+    </p>
   </div>
+    <a href="/tweet/{{id}}?method=delete" class="btn btn-default pull-right">Remove</a>
 </div>
